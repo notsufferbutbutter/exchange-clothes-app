@@ -6,6 +6,7 @@ import {
   lucideCircle,
   lucideHelpCircle,
   lucideLink,
+  lucideLogOut,
 } from '@ng-icons/lucide';
 import { BrnNavigationMenuImports } from '@spartan-ng/brain/navigation-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
@@ -21,44 +22,67 @@ import { HlmNavigationMenuImports } from '@spartan-ng/helm/navigation-menu';
       lucideCircle,
       lucideHelpCircle,
       lucideCheckCircle2,
+      lucideLogOut,
     }),
   ],
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
-  protected readonly _components = [
+  protected readonly _entdeckenComponents = [
     {
-      title: 'Alert Dialog',
-      description:
-        'A modal dialog that interrupts the user with important content and expects a response.',
+      title: 'Alle Produkte',
       href: '/components/alert-dialog',
     },
     {
-      title: 'Hover Card',
-      description:
-        'For sighted users to preview content available behind a link.',
+      title: 'Jacken',
       href: '/components/hover-card',
     },
     {
-      title: 'Progress',
-      description:
-        'Displays an indicator showing the completion progress of a task.',
+      title: 'Hosen',
       href: '/components/progress',
     },
     {
-      title: 'Scroll Area',
-      description: 'Visually or semantically separates content.',
+      title: 'Hemden',
       href: '/components/scroll-area',
     },
     {
-      title: 'Tabs',
-      description: 'A set of layered content panels displayed one at a time.',
+      title: 'Hoodies',
       href: '/components/tabs',
     },
     {
-      title: 'Tooltip',
-      description: 'A popup that displays information on hover or focus.',
+      title: 'Shorts',
+      href: '/components/tooltip',
+    },
+
+    {
+      title: 'T-Shirts',
+      href: '/components/tooltip',
+    },
+    {
+      title: 'Kleider',
       href: '/components/tooltip',
     },
   ];
+
+  protected readonly _settingComponents = [
+    {
+      title: 'Profile',
+      href: '/components/alert-dialog',
+      iconName: '', 
+      iconClass: '',
+    },
+    {
+      title: 'Docs',
+      href: '/components/hover-card',
+      iconName: '', 
+      iconClass: '',
+    },
+    {
+      title: 'Abmelden',
+      href: '/components/progress',
+      iconName:'lucideLogOut',
+      iconClass:'relative top-[2px] ml-1 size-3'
+    },
+  ];
 }
+
