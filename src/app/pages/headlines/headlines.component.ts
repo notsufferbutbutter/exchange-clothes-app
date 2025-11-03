@@ -1,5 +1,6 @@
 import { Component, computed, input, signal } from '@angular/core';
-import { HlmCard, HlmCardContent } from '@spartan-ng/helm/card';
+import { HlmCard } from '@spartan-ng/helm/card';
+import Autoplay from 'embla-carousel-autoplay';
 
 import {
   HlmCarousel,
@@ -29,6 +30,7 @@ import { RouterLink } from '@angular/router';
 })
 export class HeadlinesComponent {
   headlines = input.required<ArticleObject[]>();
+  public plugins = [Autoplay({ delay: 3500 })];
 
   currentHeadline = signal<number>(1);
   headlinesTotal = computed(() => this.headlines().length);
