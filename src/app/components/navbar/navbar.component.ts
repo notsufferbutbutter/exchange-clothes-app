@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideCheckCircle2,
@@ -14,7 +15,12 @@ import { HlmNavigationMenuImports } from '@spartan-ng/helm/navigation-menu';
 
 @Component({
   selector: 'app-navbar',
-  imports: [HlmNavigationMenuImports, BrnNavigationMenuImports, HlmIconImports],
+  imports: [
+    RouterLink,
+    HlmNavigationMenuImports,
+    BrnNavigationMenuImports,
+    HlmIconImports,
+  ],
   providers: [
     provideIcons({
       lucideChevronDown,
@@ -68,21 +74,20 @@ export class NavbarComponent {
     {
       title: 'Profile',
       href: '/components/alert-dialog',
-      iconName: '', 
+      iconName: '',
       iconClass: '',
     },
     {
       title: 'Docs',
       href: '/components/hover-card',
-      iconName: '', 
+      iconName: '',
       iconClass: '',
     },
     {
       title: 'Abmelden',
       href: '/components/progress',
-      iconName:'lucideLogOut',
-      iconClass:'relative top-[2px] ml-1 size-3'
+      iconName: 'lucideLogOut',
+      iconClass: 'relative top-[2px] ml-1 size-3',
     },
   ];
 }
-

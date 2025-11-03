@@ -1,14 +1,15 @@
-<nav hlmNavigationMenu class="w-full max-w-none my-4 px-8 py-3 border-y border-black">
+<nav
+  hlmNavigationMenu
+  class="w-full max-w-none top-0 left-0 right-0 px-8 py-3 border-y border-black fixed z-50 bg-white"
+>
   <ul hlmNavigationMenuList class="flex justify-between">
     <li hlmNavigationMenuItem>
-        <a hlmNavigationMenuLink href="/documentation/introduction ">
-            HOME       
-        </a>
-    </li> 
+      <a hlmNavigationMenuLink routerLink=""> HOME </a>
+    </li>
 
     <!-- Components Menu -->
     <li hlmNavigationMenuItem>
-      <button hlmNavigationMenuTrigger>
+      <button hlmNavigationMenuTrigger class="bg-white">
         ENTDECKEN
         <ng-icon
           name="lucideChevronDown"
@@ -37,15 +38,21 @@
     </li>
 
     <li hlmNavigationMenuItem>
-      <a hlmNavigationMenuLink href="/documentation/introduction">TAUSCHANGEBOTE</a>
+      <a hlmNavigationMenuLink href="/documentation/introduction"
+        >TAUSCHANGEBOTE</a
+      >
     </li>
 
     <li hlmNavigationMenuItem>
-      <a hlmNavigationMenuLink href="/documentation/introduction">NACHRICHTEN</a>
+      <a hlmNavigationMenuLink href="/documentation/introduction"
+        >NACHRICHTEN</a
+      >
     </li>
 
     <li hlmNavigationMenuItem>
-      <a hlmNavigationMenuLink href="/documentation/introduction">MEIN SCHRANK</a>
+      <a hlmNavigationMenuLink href="/documentation/introduction"
+        >MEIN SCHRANK</a
+      >
     </li>
 
     <li hlmNavigationMenuItem>
@@ -53,13 +60,14 @@
     </li>
 
     <li hlmNavigationMenuItem>
-      <button hlmNavigationMenuTrigger>
+      <button hlmNavigationMenuTrigger class="bg-white">
         SETTING
         <ng-icon
           name="lucideChevronDown"
           class="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
         />
       </button>
+
       <div hlmNavigationMenuContent *brnNavigationMenuContent>
         <ul class="flex-row">
           @for (component of _settingComponents; track $index) {
@@ -68,9 +76,9 @@
                 <div class="text-sm leading-none font-medium">
                   {{ component.title }}
                   <ng-icon
-                    [name]= component.iconName
-                    [class]= component.iconClass
-                    />  
+                    [name]="component.iconName"
+                    [class]="component.iconClass"
+                  />
                 </div>
               </a>
             </li>
@@ -78,11 +86,5 @@
         </ul>
       </div>
     </li>
-
-<!-- 
-    <li hlmNavigationMenuItem>
-        <a hlmNavigationMenuLink href="/documentation/introduction" class="!flex-row items-center">ABMELDEN</a>
-        
-    </li> -->
   </ul>
 </nav>
