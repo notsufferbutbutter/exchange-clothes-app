@@ -1,0 +1,63 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "bundler",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "paths": {
+      "@spartan-ng/helm/icon": [
+        "./libs/ui/icon/src/index.ts"
+      ],
+      "@spartan-ng/helm/menu": [
+        "./libs/ui/menu/src/index.ts"
+      ],
+      "@spartan-ng/helm/navigation-menu": [
+        "./libs/ui/navigation-menu/src/index.ts"
+      ],
+      "@spartan-ng/helm/typography": [
+        "./libs/ui/typography/src/index.ts"
+      ],
+      "@spartan-ng/helm/utils": [
+        "./libs/ui/utils/src/index.ts"
+      ],
+      "@spartan-ng/helm/card": [
+        "./libs/ui/card/src/index.ts"
+      ],
+      "@spartan-ng/helm/aspect-ratio": [
+        "./libs/ui/aspect-ratio/src/index.ts"
+      ],
+      "@spartan-ng/helm/button": [
+        "./libs/ui/button/src/index.ts"
+      ],
+      "@spartan-ng/helm/carousel": [
+        "./libs/ui/carousel/src/index.ts"
+      ],
+      "@spartan-ng/helm/pagination": [
+        "./libs/ui/pagination/src/index.ts"
+      ],
+      "@spartan-ng/helm/select": [
+        "./libs/ui/select/src/index.ts"
+      ],
+      "@spartan-ng/helm/form-field": [
+        "./libs/ui/form-field/src/index.ts"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
