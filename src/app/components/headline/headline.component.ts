@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { ArticleObject } from '../../../libs/models/article-object.interface';
+import { ArticleRecord } from '../../shared/models/article.record';
 import { HlmCardContent, HlmCardFooter } from '@spartan-ng/helm/card';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronRight } from '@ng-icons/lucide';
@@ -13,7 +13,7 @@ import { lucideChevronRight } from '@ng-icons/lucide';
   styleUrls: ['./headline.component.css'],
 })
 export class HeadlineComponent {
-  headline = input.required<ArticleObject>();
+  headline = input.required<ArticleRecord>();
   headlineCount = input.required<number>();
   headlinesTotal = input.required<number>();
 }

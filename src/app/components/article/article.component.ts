@@ -10,7 +10,7 @@ import {
   HlmCardTitle,
 } from '@spartan-ng/helm/card';
 import { HlmIcon } from '@spartan-ng/helm/icon';
-import { ArticleObject } from '../../../libs/models/article-object.interface';
+import { ArticleRecord } from '../../shared/models/article.record';
 
 @Component({
   selector: 'app-article',
@@ -33,5 +33,5 @@ import { ArticleObject } from '../../../libs/models/article-object.interface';
   styleUrls: ['./article.component.css'],
 })
 export class ArticleComponent {
-  article = input.required<ArticleObject>();
+  article = input.required<ArticleRecord>();
 }

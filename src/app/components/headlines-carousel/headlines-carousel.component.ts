@@ -9,7 +9,7 @@ import {
   HlmCarouselNext,
   HlmCarouselPrevious,
 } from '@spartan-ng/helm/carousel';
-import { ArticleObject } from '../../../libs/models/article-object.interface';
+import { ArticleRecord } from '../../shared/models/article.record';
 import { HeadlineComponent } from '../headline/headline.component';
 import { RouterLink } from '@angular/router';
 
@@ -30,7 +30,7 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./headlines-carousel.component.css'],
 })
 export class HeadlinesCarouselComponent {
-  headlines = input.required<ArticleObject[]>();
+  headlines = input.required<ArticleRecord[]>();
   public plugins = [Autoplay({ delay: 3500 })];
 
   currentHeadline = signal<number>(1);

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../components/navbar/navbar.component';
-import { ArticleObject } from '../../libs/models/article-object.interface';
+import { ArticleRecord } from '../shared/models/article.record';
 import { HeadlinesCarouselComponent } from '../components/headlines-carousel/headlines-carousel.component';
 
 @Component({
@@ -15,7 +15,7 @@ import { HeadlinesCarouselComponent } from '../components/headlines-carousel/hea
   `,
 })
 export default class HomePageComponent {
-  protected readonly _headlines: ArticleObject[] = [
+  protected readonly _headlines: ArticleRecord[] = [
     {
       id: '1',
       title: 'Neue Kleidertausch-Party in Berlin!',
