@@ -1,5 +1,4 @@
 import { Component, computed, signal } from '@angular/core';
-import { ArticleObject } from '../../libs/models/article-object.interface';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { ArticleComponent } from '../components/article/article.component';
 import { HlmNumberedPagination } from '@spartan-ng/helm/pagination';

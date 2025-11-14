@@ -2,7 +2,11 @@
 
 <section class="w-full flex flex-col items-center">
   <div class="flex w-full items-center justify-center p-4">
-    <hlm-carousel [options]="{ loop: true }" class="max-w-1/2" [plugins]="plugins">
+    <hlm-carousel
+      [options]="{ loop: true }"
+      class="max-w-1/2"
+      [plugins]="plugins"
+    >
       <hlm-carousel-content>
         @for (headline of headlines(); track headline.id) {
           <hlm-carousel-item>
