@@ -5,24 +5,24 @@ import {
 } from '@angular/common/http';
 import {
   ApplicationConfig,
-  provideBrowserGlobalErrorListeners,
+  isDevMode,
   provideZoneChangeDetection,
 } from '@angular/core';
 import {
   provideClientHydration,
-  withEventReplay,
 } from '@angular/platform-browser';
-import { provideFileRouter, requestContextInterceptor } from '@analogjs/router';
+import { provideFileRouter, requestContextInterceptor, withDebugRoutes } from '@analogjs/router';
+
+const debugRoutesInDevMode = isDevMode() ? [withDebugRoutes()] : [];
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideFileRouter(),
+    provideFileRouter(...debugRoutesInDevMode),
     provideHttpClient(
       withFetch(),
       withInterceptors([requestContextInterceptor]),
     ),
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(),
   ],
 };
