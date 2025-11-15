@@ -10,8 +10,8 @@ import {
   lucideLogOut,
 } from '@ng-icons/lucide';
 import { BrnNavigationMenuImports } from '@spartan-ng/brain/navigation-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { HlmNavigationMenuImports } from '@spartan-ng/helm/navigation-menu';
+import { HlmIconImports } from 'src/app/libs/ui/icon/src';
+import { HlmNavigationMenuImports } from 'src/app/libs/ui/navigation-menu/src';
 
 @Component({
   selector: 'app-navbar',
@@ -38,36 +38,36 @@ export class NavbarComponent {
   protected readonly _entdeckenComponents = [
     {
       title: 'Alle Produkte',
-      href: '/components/alert-dialog',
+      href: '/marketplace',
     },
     {
       title: 'Jacken',
-      href: '/components/hover-card',
+      href: '/marketplace',
     },
     {
       title: 'Hosen',
-      href: '/components/progress',
+      href: '/marketplace',
     },
     {
       title: 'Hemden',
-      href: '/components/scroll-area',
+      href: '/marketplace',
     },
     {
       title: 'Hoodies',
-      href: '/components/tabs',
+      href: '/marketplace',
     },
     {
       title: 'Shorts',
-      href: '/components/tooltip',
+      href: '/marketplace',
     },
 
     {
       title: 'T-Shirts',
-      href: '/components/tooltip',
+      href: '/marketplace',
     },
     {
       title: 'Kleider',
-      href: '/components/tooltip',
+      href: '/marketplace',
     },
   ];
 

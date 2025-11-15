@@ -1,11 +1,11 @@
 import { Component, computed, signal } from '@angular/core';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { ArticleComponent } from '../components/article/article.component';
-import { HlmNumberedPagination } from '@spartan-ng/helm/pagination';
+import { HlmNumberedPagination } from 'src/app/libs/ui/pagination/src';
 import { ArticlesService } from '../services/articles.service';
 
 @Component({
-  selector: 'app-articles',
+  selector: 'app-articles-page',
   standalone: true,
   imports: [NavbarComponent, ArticleComponent, HlmNumberedPagination],
   template: `
@@ -27,7 +27,7 @@ import { ArticlesService } from '../services/articles.service';
     </main>
   `,
 })
-export default class ArticlesPageComponent {
+export default class ArticlesPage {
   constructor(public service: ArticlesService) {}
 
   ngOnInit() {

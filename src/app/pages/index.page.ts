@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../components/navbar/navbar.component';
-import { ArticleRecord } from '../shared/models/article.record';
+import { ArticleRecord } from '../libs/models/article.record';
 import { HeadlinesCarouselComponent } from '../components/headlines-carousel/headlines-carousel.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-home-page',
   standalone: true,
   imports: [NavbarComponent, HeadlinesCarouselComponent],
   template: `
@@ -14,7 +14,7 @@ import { HeadlinesCarouselComponent } from '../components/headlines-carousel/hea
     </main>
   `,
 })
-export default class HomePageComponent {
+export default class HomePage {
   protected readonly _headlines: ArticleRecord[] = [
     {
       id: '1',

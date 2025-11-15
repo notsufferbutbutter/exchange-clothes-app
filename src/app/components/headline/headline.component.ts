@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import { ArticleRecord } from '../../shared/models/article.record';
-import { HlmCardContent, HlmCardFooter } from '@spartan-ng/helm/card';
+import { ArticleRecord } from '../../libs/models/article.record';
+import { HlmCardContent, HlmCardFooter } from 'src/app/libs/ui/card/src';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronRight } from '@ng-icons/lucide';
 

@@ -22,29 +22,29 @@
     "useDefineForClassFields": false,
     "skipLibCheck": true,
     "paths": {
-      "@spartan-ng/helm/icon": ["./src/app/shared/ui/icon/src/index.ts"],
-      "@spartan-ng/helm/menu": ["./src/app/shared/ui/menu/src/index.ts"],
+      "@spartan-ng/helm/icon": ["src/app/libs/ui/icon/src/index.ts"],
+      "@spartan-ng/helm/menu": ["src/app/libs/ui/menu/src/index.ts"],
       "@spartan-ng/helm/navigation-menu": [
-        "./src/app/shared/ui/navigation-menu/src/index.ts"
+        "src/app/libs/ui/navigation-menu/src/index.ts"
       ],
       "@spartan-ng/helm/typography": [
-        "./src/app/shared/ui/typography/src/index.ts"
+        "src/app/libs/ui/typography/src/index.ts"
       ],
-      "@spartan-ng/helm/utils": ["./src/app/shared/ui/utils/src/index.ts"],
-      "@spartan-ng/helm/card": ["./src/app/shared/ui/card/src/index.ts"],
+      "@spartan-ng/helm/utils": ["src/app/libs/ui/utils/src/index.ts"],
+      "@spartan-ng/helm/card": ["src/app/libs/ui/card/src/index.ts"],
       "@spartan-ng/helm/aspect-ratio": [
-        "./src/app/shared/ui/aspect-ratio/src/index.ts"
+        "src/app/libs/ui/aspect-ratio/src/index.ts"
       ],
-      "@spartan-ng/helm/button": ["./src/app/shared/ui/button/src/index.ts"],
+      "@spartan-ng/helm/button": ["src/app/libs/ui/button/src/index.ts"],
       "@spartan-ng/helm/carousel": [
-        "./src/app/shared/ui/carousel/src/index.ts"
+        "src/app/libs/ui/carousel/src/index.ts"
       ],
       "@spartan-ng/helm/pagination": [
-        "./src/app/shared/ui/pagination/src/index.ts"
+        "src/app/libs/ui/pagination/src/index.ts"
       ],
-      "@spartan-ng/helm/select": ["./src/app/shared/ui/select/src/index.ts"],
+      "@spartan-ng/helm/select": ["src/app/libs/ui/select/src/index.ts"],
       "@spartan-ng/helm/form-field": [
-        "./src/app/shared/ui/form-field/src/index.ts"
+        "src/app/libs/ui/form-field/src/index.ts"
       ]
     }
   },

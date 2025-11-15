@@ -1,5 +1,5 @@
 import { Component, computed, input, signal } from '@angular/core';
-import { HlmCard } from '@spartan-ng/helm/card';
+import { HlmCard } from 'src/app/libs/ui/card/src';
 import Autoplay from 'embla-carousel-autoplay';
 
 import {
@@ -8,8 +8,8 @@ import {
   HlmCarouselItem,
   HlmCarouselNext,
   HlmCarouselPrevious,
-} from '@spartan-ng/helm/carousel';
-import { ArticleRecord } from '../../shared/models/article.record';
+} from 'src/app/libs/ui/carousel/src';
+import { ArticleRecord } from '../../libs/models/article.record';
 import { HeadlineComponent } from '../headline/headline.component';
 import { RouterLink } from '@angular/router';
 

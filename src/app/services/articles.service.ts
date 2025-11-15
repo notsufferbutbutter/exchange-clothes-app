@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { ArticleRecord } from 'src/app/shared/models/article.record';
+import { ArticleRecord } from 'src/app/libs/models/article.record';
 import { supabase } from 'src/backend/infrastructure/supabase/superbase-client';
 
 @Injectable({ providedIn: 'root' })
