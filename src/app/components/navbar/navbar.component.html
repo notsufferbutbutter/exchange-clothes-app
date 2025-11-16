@@ -1,13 +1,33 @@
 <nav
   hlmNavigationMenu
-  class="w-full max-w-none top-0 left-0 right-0 px-8 py-3 border-y border-black fixed z-50 bg-white"
+  class="w-full max-w-none top-0 left-0 right-0 px-8 py-3 border-y border-black fixed z-50 bg-white
+  flex justify-between items-center"
 >
-  <ul hlmNavigationMenuList class="flex justify-between">
-    <li hlmNavigationMenuItem>
-      <a hlmNavigationMenuLink routerLink="/"> HOME </a>
-    </li>
+  @if(!authService.isLoggedIn()) {
+    <div>
+      <hlm-avatar class="flex items-center">
+        <img
+            src="/catProfile2.jpg"
+            alt="app icon"
+            hlmAvatarImage
+          />
+      </hlm-avatar>
+    </div>
+  }
+  
 
-    <!-- Components Menu -->
+  <ul hlmNavigationMenuList class="flex items-center gap-20">
+      @if (authService.isLoggedIn()) {
+        <li hlmNavigationMenuItem>
+          <a hlmNavigationMenuLink routerLink="/home"> HOME </a>
+        </li>
+      }
+      @else {
+        <li hlmNavigationMenuItem>
+          <a hlmNavigationMenuLink routerLink="/"> HOME </a>
+        </li>
+      }
+
     <li hlmNavigationMenuItem>
       <button hlmNavigationMenuTrigger class="bg-white">
         ENTDECKEN
@@ -16,6 +36,7 @@
           class="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
         />
       </button>
+
       <div hlmNavigationMenuContent *brnNavigationMenuContent>
         <ul
           class="grid gap-2 sm:w-[100px] md:w-[200px] md:grid-cols-2 lg:w-[300px]"
@@ -33,58 +54,77 @@
       </div>
     </li>
 
-    <li hlmNavigationMenuItem>
-      <a hlmNavigationMenuLink href="/documentation/introduction">FAVOURITES</a>
-    </li>
+    @if (authService.isLoggedIn()) {
+      <li hlmNavigationMenuItem>
+        <a hlmNavigationMenuLink href="/documentation/introduction">FAVOURITES</a>
+      </li>
 
-    <li hlmNavigationMenuItem>
-      <a hlmNavigationMenuLink href="/documentation/introduction"
-        >TAUSCHANGEBOTE</a
-      >
-    </li>
+      <li hlmNavigationMenuItem>
+        <a hlmNavigationMenuLink href="/documentation/introduction"
+          >TAUSCHANGEBOTE</a
+        >
+      </li>
 
-    <li hlmNavigationMenuItem>
-      <a hlmNavigationMenuLink href="/documentation/introduction"
-        >NACHRICHTEN</a
-      >
-    </li>
+      <li hlmNavigationMenuItem>
+        <a hlmNavigationMenuLink href="/documentation/introduction"
+          >NACHRICHTEN</a
+        >
+      </li>
 
-    <li hlmNavigationMenuItem>
-      <a hlmNavigationMenuLink href="/documentation/introduction"
-        >MEIN SCHRANK</a
-      >
-    </li>
+      <li hlmNavigationMenuItem>
+        <a hlmNavigationMenuLink href="/documentation/introduction"
+          >MEIN SCHRANK</a
+        >
+      </li>
 
-    <li hlmNavigationMenuItem>
-      <a hlmNavigationMenuLink href="/documentation/introduction">PROFIL</a>
-    </li>
+      <li hlmNavigationMenuItem>
+        <a hlmNavigationMenuLink href="/documentation/introduction">PROFIL</a>
+      </li>
 
-    <li hlmNavigationMenuItem>
-      <button hlmNavigationMenuTrigger class="bg-white">
-        SETTING
-        <ng-icon
-          name="lucideChevronDown"
-          class="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
-        />
-      </button>
+      <li hlmNavigationMenuItem>
+        <button hlmNavigationMenuTrigger class="bg-white">
+          SETTING
+          <ng-icon
+            name="lucideChevronDown"
+            class="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
+          />
+        </button>
 
-      <div hlmNavigationMenuContent *brnNavigationMenuContent>
-        <ul class="flex-row">
-          @for (component of _settingComponents; track $index) {
-            <li>
-              <a hlmNavigationMenuLink [routerLink]="component.href">
-                <div class="text-sm leading-none font-medium">
-                  {{ component.title }}
-                  <ng-icon
-                    [name]="component.iconName"
-                    [class]="component.iconClass"
-                  />
-                </div>
-              </a>
-            </li>
-          }
-        </ul>
-      </div>
-    </li>
+        <div hlmNavigationMenuContent *brnNavigationMenuContent>
+          <ul class="flex-row">
+            @for (component of _settingComponents; track $index) {
+              <li>
+                <a hlmNavigationMenuLink [routerLink]="component.href">
+                  <div class="text-sm leading-none font-medium">
+                    {{ component.title }}
+                    <ng-icon
+                      [name]="component.iconName"
+                      [class]="component.iconClass"
+                    />
+                  </div>
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      </li>
+      }
+
+      @if (!authService.isLoggedIn()) {
+        <li hlmNavigationMenuItem>
+          <a hlmNavigationMenuLink href="/documentation/introduction">DOCS</a>
+        </li>
+
+        <li hlmNavigationMenuItem>
+          <a hlmNavigationMenuLink href="/documentation/introduction">ABOUT US</a>
+        </li>
+      }
   </ul>
+
+  @if (!authService.isLoggedIn()) {
+    <div class="flex items-end gap-4">
+        <button class="border border-black text-black bg-accent-foreground hover:text-accent-foreground" hlmBtn routerLink="/login">Login</button>
+        <button class="border border-black text-black bg-accent-foreground hover:text-accent-foreground" hlmBtn routerLink="/signup">Signup</button>
+    </div>
+  }
 </nav>

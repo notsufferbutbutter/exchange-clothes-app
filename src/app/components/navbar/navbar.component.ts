@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -10,8 +10,11 @@ import {
   lucideLogOut,
 } from '@ng-icons/lucide';
 import { BrnNavigationMenuImports } from '@spartan-ng/brain/navigation-menu';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmIconImports } from 'src/app/libs/ui/icon/src';
 import { HlmNavigationMenuImports } from 'src/app/libs/ui/navigation-menu/src';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -21,6 +24,8 @@ import { HlmNavigationMenuImports } from 'src/app/libs/ui/navigation-menu/src';
     HlmNavigationMenuImports,
     BrnNavigationMenuImports,
     HlmIconImports,
+    HlmAvatarImports,
+    HlmButton
   ],
   providers: [
     provideIcons({
@@ -91,4 +96,6 @@ export class NavbarComponent {
       iconClass: 'relative top-[2px] ml-1 size-3',
     },
   ];
+
+  protected readonly authService = inject(AuthService);
 }
