@@ -84,13 +84,11 @@
   --popover: oklch(0.6 0.13 163);
   --popover-foreground: oklch(0.95 0.05 163);
 
-  /* Primary Actions
-     â†’ strong, saturated focus color */
+  /* Primary Actions strong, saturated focus color */
   --primary: oklch(0.77 0.15 163);
   --primary-foreground: oklch(0.98 0.02 166);
 
-  /* Secondary Elements
-     â†’ softer supportive tone, less contrast */
+  /* Secondary Elements softer supportive tone, less contrast */
   --secondary: oklch(0.7 0.15 162);
   --secondary-foreground: oklch(0.95 0.05 163);
 
@@ -130,3 +128,4 @@
     @apply bg-background text-foreground;
   }
 }
+
