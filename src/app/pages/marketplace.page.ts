@@ -11,10 +11,7 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
     <main class="pt-20 px-4">
       <app-marketplace />
     </main>
-    
   `,
   styles: ``,
 })
-export default class MarketplacePage {
-
-}
+export default class MarketplacePage {}

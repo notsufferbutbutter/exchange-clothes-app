@@ -8,10 +8,12 @@ import {
   isDevMode,
   provideZoneChangeDetection,
 } from '@angular/core';
+import { provideClientHydration } from '@angular/platform-browser';
 import {
-  provideClientHydration,
-} from '@angular/platform-browser';
-import { provideFileRouter, requestContextInterceptor, withDebugRoutes } from '@analogjs/router';
+  provideFileRouter,
+  requestContextInterceptor,
+  withDebugRoutes,
+} from '@analogjs/router';
 
 const debugRoutesInDevMode = isDevMode() ? [withDebugRoutes()] : [];
 

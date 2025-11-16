@@ -11,10 +11,10 @@ export default defineConfig(({ mode }) => ({
     target: ['es2020'],
   },
   resolve: {
-  mainFields: ['module', 'browser'],
+    mainFields: ['module', 'browser'],
   },
   optimizeDeps: {
-  include: ['@supabase/supabase-js', '@supabase/ssr'],
+    include: ['@supabase/supabase-js', '@supabase/ssr'],
   },
   plugins: [
     // Resolves TS path aliases like @spartan-ng/helm/icon at runtime
