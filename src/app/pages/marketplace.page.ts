@@ -8,7 +8,10 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
   imports: [MarketplaceComponent, NavbarComponent],
   template: `
     <app-navbar />
-    <app-marketplace />
+    <main class="pt-20 px-4">
+      <app-marketplace />
+    </main>
+    
   `,
   styles: ``,
 })
