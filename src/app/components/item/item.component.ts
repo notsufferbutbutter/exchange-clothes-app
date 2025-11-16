@@ -3,7 +3,6 @@ import { DatePipe } from '@angular/common';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideHeart, lucideMessagesSquare } from '@ng-icons/lucide';
 import { BrnToggleGroupImports } from '@spartan-ng/brain/toggle-group';
-import { HlmAspectRatio } from '@spartan-ng/helm/aspect-ratio';
 import { HlmButton } from '@spartan-ng/helm/button';
 import {
   HlmCard,
@@ -12,7 +11,6 @@ import {
   HlmCardFooter,
   HlmCardTitle,
 } from '@spartan-ng/helm/card';
-import { HlmIcon } from '@spartan-ng/helm/icon';
 import { Item } from 'src/app/libs/models/item.record';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmToggleGroupImports } from '@spartan-ng/helm/toggle-group';
@@ -21,8 +19,6 @@ import { HlmToggleGroupImports } from '@spartan-ng/helm/toggle-group';
   selector: 'app-item',
   imports: [
     NgIcon,
-    HlmIcon,
-    HlmAspectRatio,
     HlmCardContent,
     HlmCard,
     HlmCardTitle,
@@ -47,23 +43,23 @@ import { HlmToggleGroupImports } from '@spartan-ng/helm/toggle-group';
 
       <div hlmCardContent class="flex flex-col gap-1 py-1 items items-center">
         <h3 hlmCardTitle>{{ item().title }}</h3>
-        <p hlmCardDescription>Condition: {{ item()?.condition?.label }}</p>
-        <p hlmCardDescription>Size: {{ item()?.size?.label }}</p>
-        <p hlmCardDescription>Estimated Price: {{ item()?.price }} €</p>
+        <p hlmCardDescription>Condition: {{ item().condition?.label }}</p>
+        <p hlmCardDescription>Size: {{ item().size?.label }}</p>
+        <p hlmCardDescription>Estimated Price: {{ item().price }} €</p>
         <p hlmCardDescription>
-          Created at: {{ item()?.created_at | date: 'mediumDate' }}
+          Created at: {{ item().created_at | date: 'mediumDate' }}
         </p>
       </div>
 
       <div hlmCardFooter class="flex justify-between pt-0">
         <hlm-avatar>
           <img
-            [src]="item()?.owner?.avatarUrl"
+            [src]="item().owner?.avatarUrl"
             alt="user profile"
             hlmAvatarImage
           />
           <span class="text-white bg-destructive" hlmAvatarFallback>{{
-            item()?.owner?.username
+            item().owner?.username
           }}</span>
         </hlm-avatar>
 
