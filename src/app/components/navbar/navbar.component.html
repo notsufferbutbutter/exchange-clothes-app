@@ -10,6 +10,7 @@
       </a>
     }
     @else {
+      <!-- todo -->
       <!-- the routerlink here should be the landing page -->
       <a routerLink="/home">
         <img src="/swaplyLogo.png" alt="app logo">
@@ -84,15 +85,28 @@
           <ul class="flex-row">
             @for (component of _settingComponents; track $index) {
               <li>
-                <a hlmNavigationMenuLink [routerLink]="component.href">
-                  <div class="text-sm leading-none font-medium">
-                    {{ component.title }}
-                    <ng-icon
-                      [name]="component.iconName"
-                      [class]="component.iconClass"
-                    />
-                  </div>
-                </a>
+                @if (component.action === 'logout') {
+                  <a hlmNavigationMenuLink (click)="onLogOut()">
+                    <div class="text-sm leading-none font-medium">
+                      {{ component.title }}
+                      <ng-icon
+                        [name]="component.iconName"
+                        [class]="component.iconClass"
+                      />
+                    </div>
+                  </a>
+                }
+                @else {
+                  <a hlmNavigationMenuLink [routerLink]="component.href">
+                    <div class="text-sm leading-none font-medium">
+                      {{ component.title }}
+                      <ng-icon
+                        [name]="component.iconName"
+                        [class]="component.iconClass"
+                      />
+                    </div>
+                  </a>
+                }
               </li>
             }
           </ul>

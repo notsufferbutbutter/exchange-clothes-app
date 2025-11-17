@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideCheckCircle2,
@@ -91,11 +91,18 @@ export class NavbarComponent {
     },
     {
       title: 'Abmelden',
-      href: '/components/progress',
+      action: 'logout',
       iconName: 'lucideLogOut',
       iconClass: 'relative top-[2px] ml-1 size-3',
     },
   ];
 
   protected readonly authService = inject(AuthService);
+  router = inject(Router)
+
+  //todo: should navigate to landing page: /
+  onLogOut() {
+    this.router.navigate(['/home']);
+    this.authService.logout();
+  }
 }
