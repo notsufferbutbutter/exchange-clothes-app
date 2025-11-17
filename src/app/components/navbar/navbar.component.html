@@ -1,34 +1,23 @@
 <nav
   hlmNavigationMenu
-  class="w-full max-w-none top-0 left-0 right-0 px-8 py-3 border-y border-black fixed z-50 bg-white
+  class="w-full max-w-none top-0 left-0 right-0 px-8 py-2 border-y border-black fixed z-50 bg-white
   flex justify-between items-center"
 >
-  @if(!authService.isLoggedIn()) {
-    <div>
-      <hlm-avatar class="flex items-center">
-        <img
-            src="/catProfile2.jpg"
-            alt="app icon"
-            hlmAvatarImage
-          />
-      </hlm-avatar>
-    </div>
-  }
-  
+  <div class="w-30 h-15 -my-2 flex items-center">
+    @if (authService.isLoggedIn()) {
+      <a routerLink="/home">
+        <img src="/swaplyLogo.png" alt="app logo">
+      </a>
+    }
+    @else {
+      <!-- the routerlink here should be the landing page -->
+      <a routerLink="/home">
+        <img src="/swaplyLogo.png" alt="app logo">
+      </a>
+    }
+  </div>
 
-  <ul hlmNavigationMenuList class="flex items-center gap-20">
-      @if (authService.isLoggedIn()) {
-        <li hlmNavigationMenuItem>
-          <a hlmNavigationMenuLink routerLink="/home"> HOME </a>
-        </li>
-      }
-      @else {
-        <li hlmNavigationMenuItem>
-          <!-- <a hlmNavigationMenuLink routerLink="/"> HOME </a> -->
-          <a hlmNavigationMenuLink routerLink="/home"> HOME </a>
-        </li>
-      }
-
+  <ul hlmNavigationMenuList class="flex items-center gap-10">   
     <li hlmNavigationMenuItem>
       <button hlmNavigationMenuTrigger class="bg-white">
         ENTDECKEN
@@ -55,6 +44,10 @@
       </div>
     </li>
 
+    <li hlmNavigationMenuItem>
+      <a hlmNavigationMenuLink href="/articles">ARTIKEL</a>
+    </li>
+
     @if (authService.isLoggedIn()) {
       <li hlmNavigationMenuItem>
         <a hlmNavigationMenuLink href="/documentation/introduction">FAVOURITES</a>
@@ -76,10 +69,6 @@
         <a hlmNavigationMenuLink href="/documentation/introduction"
           >MEIN SCHRANK</a
         >
-      </li>
-
-      <li hlmNavigationMenuItem>
-        <a hlmNavigationMenuLink href="/documentation/introduction">PROFIL</a>
       </li>
 
       <li hlmNavigationMenuItem>
