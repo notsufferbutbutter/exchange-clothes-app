@@ -25,7 +25,8 @@ import { AuthService } from 'src/app/services/auth.service';
     BrnNavigationMenuImports,
     HlmIconImports,
     HlmAvatarImports,
-    HlmButton
+    HlmButton,
+    HlmAvatarImports
   ],
   providers: [
     provideIcons({
