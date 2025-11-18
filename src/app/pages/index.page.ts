@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../components/navbar/navbar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -10,5 +11,10 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
   styles: ``
 })
 export default class LandingPage {
-
+  //todo: create landing page
+  route = inject(Router);
+  
+  constructor() {
+    this.route.navigate(['/home']);
+  }
 }
