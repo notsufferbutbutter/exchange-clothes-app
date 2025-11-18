@@ -37,9 +37,11 @@ export class LoginComponent {
 		
 		if (error) {
 			this.errorMessage.set(error.message ?? "Invalid email or password");	
-		};
+		} else {
+			this.route.navigate(['/home']);
+		}
 
-		this.route.navigate(['/home'])
+		
 	}
 	
 	get email() {
