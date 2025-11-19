@@ -8,7 +8,7 @@ export interface Item {
   title: string;
   description: string;
   price: number | null;
-  images: string[];
+  images: File[];
   created_at: string;
   updated_at: string;
 
