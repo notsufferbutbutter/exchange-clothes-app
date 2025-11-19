@@ -16,7 +16,7 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmToggleGroupImports } from '@spartan-ng/helm/toggle-group';
 
 @Component({
-  selector: 'app-item',
+  selector: 'app-marketplace-item',
   imports: [
     NgIcon,
     HlmCardContent,
@@ -104,6 +104,6 @@ import { HlmToggleGroupImports } from '@spartan-ng/helm/toggle-group';
     </section>
   `,
 })
-export class ItemComponent {
+export class MarketplaceItemComponent {
   item = input.required<Item>();
 }

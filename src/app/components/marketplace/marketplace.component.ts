@@ -5,7 +5,7 @@ import { Category } from 'src/app/libs/models/category.record';
 import { Condition } from 'src/app/libs/models/condition.record';
 import { Item } from 'src/app/libs/models/item.record';
 import { Size } from 'src/app/libs/models/size.record';
-import { ItemComponent } from '../item/item.component';
+import { MarketplaceItemComponent } from '../marketplace-item/marketplace-item.component';
 
 const dummyCategories: Category[] = [
   { id: 1, label: 'Tops' },
@@ -77,7 +77,7 @@ const dummyUsers: User[] = [
 
 @Component({
   selector: 'app-marketplace',
-  imports: [HlmAutocomplete, ItemComponent],
+  imports: [HlmAutocomplete, MarketplaceItemComponent],
   templateUrl: './marketplace.component.html',
   styleUrl: './marketplace.component.css',
 })
