@@ -1,19 +1,17 @@
-<h2 class="text-3xl font-bold text-center">MARKETPLACE</h2>
+<h2 class="text-center text-3xl font-bold">MARKETPLACE</h2>
 
 <hlm-autocomplete
-  class="mt-10 mb-10"
-  [filteredOptions]="filteredOptions()"
-  [(search)]="search"
-  searchPlaceholderText="Want to look for something?"
-  [transformOptionToString]="transformOptionToString"
-  [transformOptionToValue]="transformOptionToString"
-  [requireSelection]="false"
+	class="mt-10 mb-10"
+	[filteredOptions]="filteredOptions()"
+	[(search)]="search"
+	searchPlaceholderText="Want to look for something?"
+	[transformOptionToString]="transformOptionToString"
+	[transformOptionToValue]="transformOptionToString"
+	[requireSelection]="false"
 ></hlm-autocomplete>
 
-<div
-  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
->
-  @for (item of filteredOptions(); track item.id) {
-    <app-marketplace-item [item]="item"></app-marketplace-item>
-  }
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+	@for (item of filteredOptions(); track item.id) {
+		<app-marketplace-item [item]="item"></app-marketplace-item>
+	}
 </div>

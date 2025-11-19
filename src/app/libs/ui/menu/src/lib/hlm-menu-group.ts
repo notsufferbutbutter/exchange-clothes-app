@@ -2,12 +2,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BrnMenuGroup } from '@spartan-ng/brain/menu';
 
 @Component({
-  selector: 'hlm-menu-group',
-  host: {
-    class: 'block',
-  },
-  hostDirectives: [BrnMenuGroup],
-  template: ` <ng-content /> `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'hlm-menu-group',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	hostDirectives: [BrnMenuGroup],
+	host: {
+		class: 'block',
+	},
+	template: `
+		<ng-content />
+	`,
 })
 export class HlmMenuGroup {}

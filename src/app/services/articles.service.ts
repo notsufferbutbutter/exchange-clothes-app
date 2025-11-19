@@ -4,19 +4,16 @@ import { supabase } from 'src/backend/infrastructure/supabase/superbase-client';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesService {
-  articles = signal<ArticleRecord[]>([]);
+	articles = signal<ArticleRecord[]>([]);
 
-  async getArticles() {
-    const { error, data } = await supabase
-      .from('articles')
-      .select('*')
-      .order('created_at', { ascending: false });
+	async getArticles() {
+		const { error, data } = await supabase.from('articles').select('*').order('created_at', { ascending: false });
 
-    if (error) {
-      console.error('Error getting articles from database', error.message);
-      return;
-    }
+		if (error) {
+			console.error('Error getting articles from database', error.message);
+			return;
+		}
 
-    this.articles.set(data as ArticleRecord[]);
-  }
+		this.articles.set(data as ArticleRecord[]);
+	}
 }

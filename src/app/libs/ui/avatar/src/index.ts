@@ -6,8 +6,4 @@ export * from './lib/fallback';
 export * from './lib/hlm-avatar';
 export * from './lib/image';
 
-export const HlmAvatarImports = [
-  HlmAvatarFallback,
-  HlmAvatarImage,
-  HlmAvatar,
-] as const;
+export const HlmAvatarImports = [HlmAvatarFallback, HlmAvatarImage, HlmAvatar] as const;

@@ -1,51 +1,48 @@
 import { Component, inject, signal } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideChevronDown } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
+import { HlmError } from '@spartan-ng/helm/form-field';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
-import { RouterLink } from '@angular/router';
-import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
-import { AuthService } from 'src/app/services/auth.service';
-import { HlmError } from '@spartan-ng/helm/form-field';
 import { passwordCannotContainsEmailNameValidation } from 'src/app/libs/validators/passwordCannotContainEmailNameValidation';
 import { passwordStrengthValidation } from 'src/app/libs/validators/passwordStrengthValidation';
-
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
 	selector: 'app-signup',
-	imports: [HlmCardImports, HlmLabelImports, HlmInputImports, HlmButtonImports, RouterLink, ReactiveFormsModule, HlmError],
+	imports: [
+		HlmCardImports,
+		HlmLabelImports,
+		HlmInputImports,
+		HlmButtonImports,
+		RouterLink,
+		ReactiveFormsModule,
+		HlmError,
+	],
 	providers: [provideIcons({ lucideCheck, lucideChevronDown })],
 	host: {
 		class: 'contents',
 	},
-	templateUrl: './signup.component.html'
+	templateUrl: './signup.component.html',
 })
 export class SignupComponent {
 	private readonly _fb = inject(FormBuilder);
 	private readonly _authService = inject(AuthService);
 
-	errorMessage = signal<string|null>(null);
-	succeededMessage = signal<string|null>(null);
+	errorMessage = signal<string | null>(null);
+	succeededMessage = signal<string | null>(null);
 
 	public signupForm = this._fb.group(
 		{
-			email: ['', 
-				[
-					Validators.required,
-					Validators.email
-				]
-			],
-			password: ['', 
-				[
-					Validators.required,
-					passwordStrengthValidation()
-				]
-			],
+			email: ['', [Validators.required, Validators.email]],
+			password: ['', [Validators.required, passwordStrengthValidation()]],
 		},
-		{ validators: passwordCannotContainsEmailNameValidation() }
-	)
+		{ validators: passwordCannotContainsEmailNameValidation() },
+	);
 
 	async onSubmit() {
 		if (this.signupForm.invalid) return;
@@ -54,10 +51,9 @@ export class SignupComponent {
 
 		const { error, message } = await this._authService.signupNewUser(email!, password!);
 
-		if ( error ) {
+		if (error) {
 			this.errorMessage.set(error.message);
-		}
-		else {
+		} else {
 			this.succeededMessage.set(message);
 		}
 	}

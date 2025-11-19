@@ -1,125 +1,129 @@
-<h2 class="text-3xl font-bold text-center">Mein Schrank</h2>
-
+<h2 class="text-center text-3xl font-bold">Mein Schrank</h2>
 
 <hlm-dialog>
-    <div class="flex justify-end mr-10">
-        <button id="add-article" brnDialogTrigger hlmBtn>Artikel hinzufügen</button>
-    </div>
-    
-    <hlm-dialog-content class="w-150 mx-auto" *brnDialogContent="let ctx">
-        <hlm-dialog-header>
-            <h3 hlmDialogTitle>Neuen Artikel hinzufügen</h3>
-        </hlm-dialog-header>
+	<div class="mr-10 flex justify-end">
+		<button id="add-article" brnDialogTrigger hlmBtn>Artikel hinzufügen</button>
+	</div>
 
-        <form [formGroup]="addItemForm" (ngSubmit)="onSubmit()">
-            <div hlmFieldGroup>
-                <div class="grid grid-cols-2 gap-2">
-                    <div hlmField>
-                        <label hlmFieldLabel for="name">Name</label>
-                        <input hlmInput placeholder="z.B. Schwarzes Kleid" id="name" formControlName="name">
-                    </div>
+	<hlm-dialog-content class="mx-auto w-150" *brnDialogContent="let ctx">
+		<hlm-dialog-header>
+			<h3 hlmDialogTitle>Neuen Artikel hinzufügen</h3>
+		</hlm-dialog-header>
 
-                    <div hlmField>
-                        <label hlmFieldLabel for="brand">Marke</label>
-                        <input hlmInput placeholder="z.B. Zara" id="brand" formControlName="brand">
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-3 gap-2">
-                    <div hlmField>
-                        <label for="category">Kategorie</label>
-                        <brn-select id="category" class="inline-block" placeholder="Wählen" formControlName="category">
-                            <hlm-select-trigger>
-                                <hlm-select-value />
-                            </hlm-select-trigger>
-                            
-                            <hlm-select-content>
-                                <hlm-option value="01">Hosen</hlm-option>
-                                <hlm-option value="02">Hoodies</hlm-option>
-                                <hlm-option value="03">T-Shirts</hlm-option>
-                                <hlm-option value="04">Jacken</hlm-option>
-                                <hlm-option value="05">Hemden</hlm-option>
-                                <hlm-option value="06">Shorts</hlm-option>
-                                <hlm-option value="07">Kleider</hlm-option>
-                            </hlm-select-content>
-                        </brn-select>
-                    </div>
+		<form [formGroup]="addItemForm" (ngSubmit)="onSubmit()">
+			<div hlmFieldGroup>
+				<div class="grid grid-cols-2 gap-2">
+					<div hlmField>
+						<label hlmFieldLabel for="name">Name</label>
+						<input hlmInput placeholder="z.B. Schwarzes Kleid" id="name" formControlName="name" />
+					</div>
 
-                    <div hlmField>
-                        <label for="size">Größe</label>
-                        <brn-select id="size" class="inline-block" placeholder="Wählen" formControlName="size">
-                            <hlm-select-trigger>
-                                <hlm-select-value />
-                            </hlm-select-trigger>
+					<div hlmField>
+						<label hlmFieldLabel for="brand">Marke</label>
+						<input hlmInput placeholder="z.B. Zara" id="brand" formControlName="brand" />
+					</div>
+				</div>
 
-                            <hlm-select-content>
-                                <hlm-option value="01">XS</hlm-option>
-                                <hlm-option value="02">S</hlm-option>
-                                <hlm-option value="03">M</hlm-option>
-                                <hlm-option value="04">L</hlm-option>
-                                <hlm-option value="05">XL</hlm-option>
-                                <hlm-option value="06">XXL</hlm-option>
-                                <hlm-option value="07">XXXL</hlm-option>
-                                <hlm-option value="08">One Size</hlm-option>
-                            </hlm-select-content>
-                        </brn-select>
-                    </div>
+				<div class="grid grid-cols-3 gap-2">
+					<div hlmField>
+						<label for="category">Kategorie</label>
+						<brn-select id="category" class="inline-block" placeholder="Wählen" formControlName="category">
+							<hlm-select-trigger>
+								<hlm-select-value />
+							</hlm-select-trigger>
 
-                    <div hlmField>
-                        <label for="condition">Zustand</label>
-                        <brn-select id="condition" class="inline-block" placeholder="Wählen" formControlName="condition">
-                            <hlm-select-trigger>
-                                <hlm-select-value />
-                            </hlm-select-trigger>
+							<hlm-select-content>
+								<hlm-option value="01">Hosen</hlm-option>
+								<hlm-option value="02">Hoodies</hlm-option>
+								<hlm-option value="03">T-Shirts</hlm-option>
+								<hlm-option value="04">Jacken</hlm-option>
+								<hlm-option value="05">Hemden</hlm-option>
+								<hlm-option value="06">Shorts</hlm-option>
+								<hlm-option value="07">Kleider</hlm-option>
+							</hlm-select-content>
+						</brn-select>
+					</div>
 
-                            <hlm-select-content>
-                                <hlm-option value="01">New</hlm-option>
-                                <hlm-option value="02">Like New</hlm-option>
-                                <hlm-option value="03">Gently Used</hlm-option>
-                                <hlm-option value="04">Worn</hlm-option>
-                                <hlm-option value="05">Damaged</hlm-option>
-                                <hlm-option value="06">Vintage</hlm-option>
-                                <hlm-option value="07">Refurbished</hlm-option>
-                                <hlm-option value="08">Customized</hlm-option>
-                            </hlm-select-content>
-                        </brn-select>
-                    </div>
-                </div>
+					<div hlmField>
+						<label for="size">Größe</label>
+						<brn-select id="size" class="inline-block" placeholder="Wählen" formControlName="size">
+							<hlm-select-trigger>
+								<hlm-select-value />
+							</hlm-select-trigger>
 
-                <div hlmField>
-                    <label hlmFieldLabel class="inline-block" for="color">Farbe</label>
-                    <input hlmInput placeholder="z.B. Schwarz" id="color" formControlName="color">
-                </div>
+							<hlm-select-content>
+								<hlm-option value="01">XS</hlm-option>
+								<hlm-option value="02">S</hlm-option>
+								<hlm-option value="03">M</hlm-option>
+								<hlm-option value="04">L</hlm-option>
+								<hlm-option value="05">XL</hlm-option>
+								<hlm-option value="06">XXL</hlm-option>
+								<hlm-option value="07">XXXL</hlm-option>
+								<hlm-option value="08">One Size</hlm-option>
+							</hlm-select-content>
+						</brn-select>
+					</div>
 
-                <div hlmField>
-                    <label hlmFieldLabel for="description">Beschreibung</label>
-                    <textarea hlmTextarea class="border border-input resize-none" id="description" formControlName="description"></textarea>
-                </div>
+					<div hlmField>
+						<label for="condition">Zustand</label>
+						<brn-select id="condition" class="inline-block" placeholder="Wählen" formControlName="condition">
+							<hlm-select-trigger>
+								<hlm-select-value />
+							</hlm-select-trigger>
 
-                <div hlmField>
-                    <label hlmLabel for="picture">Upload file</label>
-                    <input hlmInput class="w-80 h-20" id="picture" type="file"  formControlName="images" multiple/>
-                </div>
-            </div>
+							<hlm-select-content>
+								<hlm-option value="01">New</hlm-option>
+								<hlm-option value="02">Like New</hlm-option>
+								<hlm-option value="03">Gently Used</hlm-option>
+								<hlm-option value="04">Worn</hlm-option>
+								<hlm-option value="05">Damaged</hlm-option>
+								<hlm-option value="06">Vintage</hlm-option>
+								<hlm-option value="07">Refurbished</hlm-option>
+								<hlm-option value="08">Customized</hlm-option>
+							</hlm-select-content>
+						</brn-select>
+					</div>
+				</div>
 
-            <hlm-dialog-footer class="mt-3">
-                <button hlmBtn variant="outline" brnDialogClose>Cancel</button>
-                <button hlmBtn type="submit">Save changes</button>
-            </hlm-dialog-footer>
-        </form>
-    </hlm-dialog-content>
+				<div hlmField>
+					<label hlmFieldLabel class="inline-block" for="color">Farbe</label>
+					<input hlmInput placeholder="z.B. Schwarz" id="color" formControlName="color" />
+				</div>
+
+				<div hlmField>
+					<label hlmFieldLabel for="description">Beschreibung</label>
+					<textarea
+						hlmTextarea
+						class="border-input resize-none border"
+						id="description"
+						formControlName="description"
+					></textarea>
+				</div>
+
+				<div hlmField>
+					<label hlmLabel for="picture">Upload file</label>
+					<input hlmInput class="h-20 w-80" id="picture" type="file" formControlName="images" multiple />
+				</div>
+			</div>
+
+			<hlm-dialog-footer class="mt-3">
+				<button hlmBtn variant="outline" brnDialogClose>Cancel</button>
+				<button hlmBtn type="submit">Save changes</button>
+			</hlm-dialog-footer>
+		</form>
+	</hlm-dialog-content>
 </hlm-dialog>
 
 @if (items().length === 0) {
-    <div class="flex items-center justify-center h-72 bg-white rounded-2xl m-10">
-            <div class="absolute text-center text-neutral-500 text-base font-normal font-['Inter'] leading-6">Du hast noch keine Artikel.</div>
-    </div>
+	<div class="m-10 flex h-72 items-center justify-center rounded-2xl bg-white">
+		<div class="absolute text-center font-['Inter'] text-base leading-6 font-normal text-neutral-500">
+			Du hast noch keine Artikel.
+		</div>
+	</div>
 }
 
-<div
-  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
->
-    @for (item of items(); track item.id) {
-    <app-closet-item [item]="item"></app-closet-item>
-  }
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+	@for (item of items(); track item.id) {
+		<app-closet-item [item]="item"></app-closet-item>
+	}
 </div>

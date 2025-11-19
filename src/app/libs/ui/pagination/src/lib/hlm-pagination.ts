@@ -1,31 +1,20 @@
 import { Directive, computed, input } from '@angular/core';
 import { hlm } from '@spartan-ng/helm/utils';
-import { type VariantProps, cva } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
 
-export const paginationVariants = cva('mx-auto flex w-full justify-center', {
-  variants: {},
-  defaultVariants: {},
-});
-export type PaginationVariants = VariantProps<typeof paginationVariants>;
-
 @Directive({
-  selector: '[hlmPagination]',
-  host: {
-    role: 'navigation',
-    '[class]': '_computedClass()',
-    '[attr.aria-label]': 'ariaLabel()',
-  },
+	selector: '[hlmPagination],hlm-pagination',
+	host: {
+		'data-slot': 'pagination',
+		role: 'navigation',
+		'[class]': '_computedClass()',
+		'[attr.aria-label]': 'ariaLabel()',
+	},
 })
 export class HlmPagination {
-  public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected readonly _computedClass = computed(() => hlm('mx-auto flex w-full justify-center', this.userClass()));
 
-  /** The aria-label for the pagination component. */
-  public readonly ariaLabel = input<string>('pagination', {
-    alias: 'aria-label',
-  });
-
-  protected readonly _computedClass = computed(() =>
-    hlm(paginationVariants(), this.userClass()),
-  );
+	/** The aria-label for the pagination component. */
+	public readonly ariaLabel = input<string>('pagination', { alias: 'aria-label' });
 }

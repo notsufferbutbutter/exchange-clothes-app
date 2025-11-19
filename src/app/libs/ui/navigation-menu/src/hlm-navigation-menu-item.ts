@@ -4,15 +4,13 @@ import { hlm } from '@spartan-ng/helm/utils';
 import { ClassValue } from 'clsx';
 
 @Directive({
-  selector: 'li[hlmNavigationMenuItem]',
-  host: {
-    '[class]': '_computedClass()',
-  },
-  hostDirectives: [{ directive: BrnNavigationMenuItem, inputs: ['id'] }],
+	selector: 'li[hlmNavigationMenuItem]',
+	hostDirectives: [{ directive: BrnNavigationMenuItem, inputs: ['id'] }],
+	host: {
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmNavigationMenuItem {
-  public readonly userClass = input<ClassValue>('', { alias: 'class' });
-  protected readonly _computedClass = computed(() =>
-    hlm('relative', this.userClass()),
-  );
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected readonly _computedClass = computed(() => hlm('relative', this.userClass()));
 }

@@ -1,4 +1,4 @@
 export interface Size {
-  id: number;
-  label: string;
+	id: number;
+	label: string;
 }

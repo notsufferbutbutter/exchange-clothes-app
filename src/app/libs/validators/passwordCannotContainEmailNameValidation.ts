@@ -1,25 +1,24 @@
-import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function passwordCannotContainsEmailNameValidation(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-         
-        const group = control as FormGroup;
+	return (control: AbstractControl): ValidationErrors | null => {
+		const group = control as FormGroup;
 
-        if ( !group ) return null;
+		if (!group) return null;
 
-        const email = group.controls['email']?.value;
+		const email = group.controls['email']?.value;
 
-        const password = group.controls['password']?.value;
+		const password = group.controls['password']?.value;
 
-        const emailName = email.split('@')[0];
+		const emailName = email.split('@')[0];
 
-        const containsEmailName = password.toLowerCase().includes(emailName.toLowerCase());
+		const containsEmailName = password.toLowerCase().includes(emailName.toLowerCase());
 
-        if (containsEmailName) {
-            group.controls['password'].setErrors({ containsEmailName: true });
-            return { containsEmailName: true };
-        }
+		if (containsEmailName) {
+			group.controls['password'].setErrors({ containsEmailName: true });
+			return { containsEmailName: true };
+		}
 
-        return null;
-    }
+		return null;
+	};
 }

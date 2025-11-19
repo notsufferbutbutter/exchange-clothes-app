@@ -1,23 +1,17 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { computed, Directive, input } from '@angular/core';
 import { hlm } from '@spartan-ng/helm/utils';
 import type { ClassValue } from 'clsx';
 
-@Component({
-  selector: 'hlm-skeleton',
-  template: '',
-  host: {
-    '[class]': '_computedClass()',
-  },
-  changeDetection: ChangeDetectionStrategy.OnPush,
+@Directive({
+	selector: '[hlmSkeleton],hlm-skeleton',
+	host: {
+		'data-slot': 'skeleton',
+		'[class]': '_computedClass()',
+	},
 })
 export class HlmSkeleton {
-  public readonly userClass = input<ClassValue>('', { alias: 'class' });
-  protected readonly _computedClass = computed(() =>
-    hlm('bg-muted block animate-pulse rounded-md', this.userClass()),
-  );
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected readonly _computedClass = computed(() =>
+		hlm('bg-accent block rounded-md motion-safe:animate-pulse', this.userClass()),
+	);
 }
