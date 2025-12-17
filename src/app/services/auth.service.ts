@@ -1,32 +1,46 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { supabase } from 'src/backend/infrastructure/supabase/superbase-client';
+import { UserService } from './user.service';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthService {
-	readonly isLoggedIn = signal<boolean>(false);
-	readonly user = signal<any>(null);
+	public readonly isLoggedIn = signal<boolean>(false);
+	private readonly userService = inject(UserService);
 
 	constructor() {
 		this.restoreSession();
 	}
 
 	async restoreSession() {
-		const { data } = await supabase.auth.getSession();
-		if (data?.session) {
+		const { data, error } = await supabase.auth.getSession();
+		if(error) console.error('Error at restoring session', error);
+		if (!data.session) {
+			this.isLoggedIn.set(false);
+			return;
+		}
+		else {
 			this.isLoggedIn.set(true);
-			this.user.set(data.session);
+			await this.userService.setCurrentUserById(data.session.user.id);
 		}
 	}
 
-	async signupNewUser(email: string, password: string) {
+
+	async signup(email: string, password: string) {
 		const { data, error } = await supabase.auth.signUp({
 			email: email,
 			password: password,
 		});
 
-		if (error) return { error };
+		if (error || !data.user) {
+			console.error('Error at signing up: ', error);
+			return { error };
+		}
+
+		const userId = data.user.id;
+
+		await this.userService.registerCurrentUser(userId, email);
 
 		return { message: 'Check your email to verify your account' };
 	}
@@ -37,17 +51,22 @@ export class AuthService {
 			password: password,
 		});
 
-		if (error) return { error };
+		if (error || !data.user?.id) {
+			console.error('Error at having userId from login', error);
+			return { error };
+		}
 
+		const userId = data.user.id;
+		console.log(userId);
 		this.isLoggedIn.set(true);
-		this.user.set(data.user);
+		await this.userService.setCurrentUserById(userId);
 
-		return { data };
+		return { data, error };
 	}
 
 	async logout() {
 		await supabase.auth.signOut();
 		this.isLoggedIn.set(false);
-		this.user.set(null);
+		this.userService.resetUser();
 	}
 }

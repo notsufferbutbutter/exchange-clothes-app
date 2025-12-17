@@ -4,16 +4,28 @@ import { supabase } from 'src/backend/infrastructure/supabase/superbase-client';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesService {
-	articles = signal<ArticleRecord[]>([]);
 
-	async getArticles() {
+	async getAllArticles() : Promise<ArticleRecord[]>{
 		const { error, data } = await supabase.from('articles').select('*').order('created_at', { ascending: false });
 
 		if (error) {
 			console.error('Error getting articles from database', error.message);
-			return;
+			return [];
 		}
 
-		this.articles.set(data as ArticleRecord[]);
+		return data.map(this.mapToAritcle);
+	}
+
+	private mapToAritcle(data: any) : ArticleRecord {
+		return {
+			id: data.article_id,
+			title: data.title,
+			date: data.date,
+			author: data.author,
+			image: data.image,
+			summary: data.summary,
+			link: data.link,
+			type: data.type
+		}
 	}
 }
