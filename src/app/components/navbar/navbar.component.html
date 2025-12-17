@@ -1,13 +1,13 @@
 <nav hlmNavigationMenu class="z-50 min-w-full justify-between border-y border-black bg-white px-8 py-2">
 	<div class="-my-2 flex h-15 w-30 items-center">
 		@if (authService.isLoggedIn()) {
-			<a routerLink="/home">
+			<a routerLink="/">
 				<img src="/swaplyLogo.png" alt="app logo" />
 			</a>
 		} @else {
 			<!-- todo -->
 			<!-- the routerlink here should be the landing page -->
-			<a routerLink="/home">
+			<a routerLink="/">
 				<img src="/swaplyLogo.png" alt="app logo" />
 			</a>
 		}
@@ -25,7 +25,7 @@
 
 			<div hlmNavigationMenuContent *brnNavigationMenuContent>
 				<ul class="grid gap-2 sm:w-[100px] md:w-[200px] md:grid-cols-2 lg:w-[300px]">
-					@for (component of _entdeckenComponents; track component.title) {
+					@for (component of entdeckenComponents; track component.title) {
 						<li>
 							<a hlmNavigationMenuLink [routerLink]="component.href">
 								<div class="text-sm leading-none font-medium">
@@ -39,20 +39,20 @@
 		</li>
 
 		<li hlmNavigationMenuItem>
-			<a hlmNavigationMenuLink href="/articles">ARTIKEL</a>
+			<a hlmNavigationMenuLink routerLink="/articles">ARTIKEL</a>
 		</li>
 
 		@if (authService.isLoggedIn()) {
 			<li hlmNavigationMenuItem>
-				<a hlmNavigationMenuLink href="/documentation/introduction">FAVOURITES</a>
+				<a hlmNavigationMenuLink routerLink="/favourites">FAVOURITES</a>
 			</li>
 
 			<li hlmNavigationMenuItem>
-				<a hlmNavigationMenuLink href="/documentation/introduction">TAUSCHANGEBOTE</a>
+				<a hlmNavigationMenuLink routerLink="/trade-overview">TAUSCHANGEBOTE</a>
 			</li>
 
 			<li hlmNavigationMenuItem>
-				<a hlmNavigationMenuLink href="/documentation/introduction">NACHRICHTEN</a>
+				<a hlmNavigationMenuLink routerLink="/chat">NACHRICHTEN</a>
 			</li>
 
 			<li hlmNavigationMenuItem>
@@ -68,13 +68,12 @@
 
 				<div hlmNavigationMenuContent *brnNavigationMenuContent>
 					<ul class="flex-row">
-						@for (component of _settingComponents; track $index) {
+						@for (component of settingComponents; track $index) {
 							<li>
 								@if (component.action === 'logout') {
 									<a hlmNavigationMenuLink (click)="onLogOut()">
 										<div class="text-sm leading-none font-medium">
 											{{ component.title }}
-											<ng-icon [name]="component.iconName" [class]="component.iconClass" />
 										</div>
 									</a>
 								} @else {

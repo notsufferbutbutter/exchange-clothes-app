@@ -44,7 +44,9 @@ import { AuthService } from 'src/app/services/auth.service';
 	},
 })
 export class NavbarComponent {
-	protected readonly _entdeckenComponents = [
+	readonly authService = inject(AuthService);
+	private readonly router = inject(Router);
+	readonly entdeckenComponents = [
 		{
 			title: 'Alle Produkte',
 			href: '/marketplace',
@@ -80,7 +82,7 @@ export class NavbarComponent {
 		},
 	];
 
-	protected readonly _settingComponents = [
+	readonly settingComponents = [
 		{
 			title: 'Profile',
 			href: '/components/alert-dialog',
@@ -101,12 +103,8 @@ export class NavbarComponent {
 		},
 	];
 
-	protected readonly authService = inject(AuthService);
-	router = inject(Router);
-
-	//todo: should navigate to landing page: /
 	onLogOut() {
-		this.router.navigate(['/home']);
+		this.router.navigate(['/']);
 		this.authService.logout();
 	}
 }
