@@ -9,23 +9,17 @@
 
 	<div hlmCardContent class="items flex flex-col items-center gap-1 py-1">
 		<h3 hlmCardTitle>{{ item().title }}</h3>
-		<p hlmCardDescription>Condition: {{ item().condition?.label }}</p>
-		<p hlmCardDescription>Size: {{ item().size?.label }}</p>
+		<p hlmCardDescription>Condition: {{ item().condition }}</p>
+		<p hlmCardDescription>Size: {{ item().size }}</p>
 		<p hlmCardDescription>Estimated Price: {{ item().price }} €</p>
-		<p hlmCardDescription>Created at: {{ item().created_at | date: 'mediumDate' }}</p>
+		<p hlmCardDescription>Created at: {{ item().createdAt | date: 'mediumDate' }}</p>
 	</div>
 
-	<div hlmCardFooter class="flex justify-between pt-0">
+	<div hlmCardFooter class="flex justify-center">
 		<div
 			class="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground flex items-center self-stretch rounded-full border border-black px-4 py-2"
 		>
-			<div class="text-sm">Bearbeiten</div>
-		</div>
-
-		<div class="flex gap-3">
-			<button hlmBtn size="sm" class="flex items-center justify-center">
-				<ng-icon name="lucideMessagesSquare" size="20" />
-			</button>
+			<button hlmButton class="text-sm" (click)="onClick()">Bearbeiten</button>
 		</div>
 	</div>
 </section>
