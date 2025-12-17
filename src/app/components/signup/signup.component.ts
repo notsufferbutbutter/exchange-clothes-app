@@ -30,13 +30,13 @@ import { AuthService } from 'src/app/services/auth.service';
 	templateUrl: './signup.component.html',
 })
 export class SignupComponent {
-	private readonly _fb = inject(FormBuilder);
-	private readonly _authService = inject(AuthService);
+	private readonly fb = inject(FormBuilder);
+	private readonly authService = inject(AuthService);
 
-	errorMessage = signal<string | null>(null);
-	succeededMessage = signal<string | null>(null);
+	readonly errorMessage = signal<string | null>(null);
+	readonly succeededMessage = signal<string | null>(null);
 
-	public signupForm = this._fb.group(
+	signupForm = this.fb.group(
 		{
 			email: ['', [Validators.required, Validators.email]],
 			password: ['', [Validators.required, passwordStrengthValidation()]],
@@ -49,7 +49,7 @@ export class SignupComponent {
 
 		const { email, password } = this.signupForm.value;
 
-		const { error, message } = await this._authService.signupNewUser(email!, password!);
+		const { error, message } = await this.authService.signupNewUser(email!, password!);
 
 		if (error) {
 			this.errorMessage.set(error.message);

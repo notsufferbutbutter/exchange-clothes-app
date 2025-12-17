@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Footer } from '@ecp/app/components/footer/navbar.component';
+import { Footer } from '@ecp/app/components/footer/footer.component';
 import { NavbarComponent } from '@ecp/app/components/navbar/navbar.component';
 
 @Component({
@@ -11,10 +11,10 @@ import { NavbarComponent } from '@ecp/app/components/navbar/navbar.component';
 		class: 'bg-background relative z-10 flex min-h-svh flex-col',
 	},
 	template: `
-		<app-navbar />
-		<main class="flex flex-1 flex-col">
-			<router-outlet />
-		</main>
+		<app-navbar class="mb-5"/>
+			<main class="flex flex-1 flex-col">
+				<router-outlet />
+			</main>
 		<app-footer />
 	`,
 })

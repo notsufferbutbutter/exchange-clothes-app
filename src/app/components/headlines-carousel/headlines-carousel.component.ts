@@ -27,15 +27,13 @@ import { HeadlineComponent } from '../headline/headline.component';
 		HeadlineComponent,
 	],
 	templateUrl: './headlines-carousel.component.html',
-	styleUrls: ['./headlines-carousel.component.css'],
 })
 export class HeadlinesCarouselComponent {
-	headlines = input.required<ArticleRecord[]>();
-	public plugins = [Autoplay({ delay: 3500 })];
-
-	currentHeadline = signal<number>(1);
-	headlinesTotal = computed(() => this.headlines().length);
-
+	readonly plugins = [Autoplay({ delay: 3500 })];
+	readonly headlines = input.required<ArticleRecord[]>();
+	readonly headlinesTotal = computed(() => this.headlines().length);
+	readonly currentHeadline = signal<number>(1);
+	
 	next() {
 		if (this.currentHeadline() < this.headlinesTotal()) {
 			this.currentHeadline.update((i) => i + 1);

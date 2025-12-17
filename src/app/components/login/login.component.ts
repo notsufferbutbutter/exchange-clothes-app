@@ -28,12 +28,12 @@ import { AuthService } from 'src/app/services/auth.service';
 	templateUrl: './login.component.html',
 })
 export class LoginComponent {
-	private readonly _fb = inject(FormBuilder);
-	private readonly _authService = inject(AuthService);
-	errorMessage = signal<string | null>(null);
-	route = inject(Router);
+	private readonly route = inject(Router);
+	private fb = inject(FormBuilder);
+	private readonly authService = inject(AuthService);
+	readonly errorMessage = signal<string | null>(null);
 
-	public loginForm = this._fb.group({
+	public loginForm = this.fb.group({
 		email: ['', [Validators.required, Validators.email]],
 		password: ['', [Validators.required]],
 	});
@@ -41,7 +41,7 @@ export class LoginComponent {
 	async onSubmit() {
 		if (this.loginForm.invalid) return;
 
-		const { error } = await this._authService.loginWithEmail(
+		const { error } = await this.authService.loginWithEmail(
 			this.loginForm.value.email!,
 			this.loginForm.value.password!,
 		);
@@ -49,15 +49,15 @@ export class LoginComponent {
 		if (error) {
 			this.errorMessage.set(error.message ?? 'Invalid email or password');
 		} else {
-			this.route.navigate(['/home']);
+			this.route.navigate(['/']);
 		}
 	}
 
-	get email() {
+	public get email() {
 		return this.loginForm.controls['email'];
 	}
 
-	get password() {
+	public get password() {
 		return this.loginForm.controls['password'];
 	}
 }

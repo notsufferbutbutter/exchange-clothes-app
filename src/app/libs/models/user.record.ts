@@ -1,10 +1,10 @@
 export interface User {
-	user_id: string;
+	id: string;
 
 	username: string;
 	email: string;
 
-	created_at: string;
+	createdAt: string;
 	updatedAt: string | null;
 
 	passwordHash: string | null;

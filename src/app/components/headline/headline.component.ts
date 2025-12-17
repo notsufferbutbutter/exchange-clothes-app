@@ -10,10 +10,9 @@ import { ArticleRecord } from '../../libs/models/article.record';
 	imports: [HlmCardContent, HlmCardFooter],
 	providers: [provideIcons({ lucideChevronRight })],
 	templateUrl: './headline.component.html',
-	styleUrls: ['./headline.component.css'],
 })
 export class HeadlineComponent {
-	headline = input.required<ArticleRecord>();
-	headlineCount = input.required<number>();
-	headlinesTotal = input.required<number>();
+	readonly headline = input.required<ArticleRecord>();
+	readonly headlineCount = input.required<number>();
+	readonly headlinesTotal = input.required<number>();
 }

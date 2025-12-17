@@ -1,25 +1,16 @@
-import { Category } from './category.record';
-import { Condition } from './condition.record';
-import { Size } from './size.record';
-import { User } from './user.record';
-
 export interface Item {
 	id: number;
 	title: string;
 	description: string;
 	price: number | null;
-	images: File[];
-	created_at: string;
-	updated_at: string;
+	images: string[];
+	createdAt: string;
+	updatedAt: string;
 
-	owner_id: string;
-	category_id: number;
-	size_id: number;
-	condition_id: number;
-
-	// Expanded Joins
-	owner?: User;
-	category?: Category;
-	size?: Size;
-	condition?: Condition;
+	ownerId: string;
+	category: string;
+	size: string;
+	condition: string;
+	brand: string;
+	color: string;
 }

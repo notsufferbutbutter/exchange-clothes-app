@@ -15,8 +15,7 @@ import { ArticleRecord } from '../../libs/models/article.record';
 		class: 'w-full',
 	},
 	templateUrl: './article.component.html',
-	styleUrls: ['./article.component.css'],
 })
 export class ArticleComponent {
-	article = input.required<ArticleRecord>();
+	readonly article = input.required<ArticleRecord>();
 }
