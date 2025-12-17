@@ -1,0 +1,61 @@
+<div
+    class="flex w-full"
+    [ngClass]="{
+        'justify-end' : currentUserId() === chatMessage().senderId,
+        'justify-start' : currentUserId() !== chatMessage().senderId
+    }"
+>
+    @if (parsedMessage().imageUrl) {
+    <div
+        class="
+        flex flex-col gap-2
+        max-w-xs
+        rounded-2xl
+        bg-white
+        p-5
+        shadow-sm
+        border border-black/5
+        "
+    >
+            <p class="text-lg text-gray-800">
+                {{ parsedMessage().text }}
+            </p>
+
+            <img
+            [src]="parsedMessage().imageUrl"
+            alt="Trade Item"
+            class="
+                rounded-xl
+                object-cover
+                max-h-64
+                w-full
+            "
+            />
+    </div>
+    }
+
+    @else {
+        @if (currentUserId() === chatMessage().senderId) {
+            <!-- Current user's message: bubble + avatar on the right -->
+            <div class="flex items-end gap-3">
+                <button class="px-4 py-2 rounded-2xl text-sm bg-[#2c4c3b] text-[#fdfbf7] rounded-br-none">
+                    {{ parsedMessage().message }}
+                </button>
+                <hlm-avatar>
+                    <img src="/catProfile2.jpg" alt="profile" hlmAvatarImage />
+                </hlm-avatar>
+            </div>
+        }
+        @else {
+            <!-- Partner's message: avatar + bubble on the left -->
+            <div class="flex items-end gap-3">
+                <hlm-avatar>
+                    <img src="/catProfile3.jpg" alt="profile" hlmAvatarImage>
+                </hlm-avatar>
+                <button class="px-4 py-2 rounded-2xl text-sm bg-[#e2e8e2] text-[#2c4c3b] rounded-bl-none">
+                    {{ parsedMessage().message }}
+                </button>
+            </div>
+        }
+    }
+</div>

@@ -1,0 +1,95 @@
+<ng-template #snowEffect>
+  <div class="snow-ball-container absolute inset-0 pointer-events-none z-0 overflow-hidden">
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+      <div class="snow-ball"></div>
+  </div>
+</ng-template>
+
+<div class="grid flex-1 grid-cols-[280px_minmax(0,1fr)] gap-6 px-8 pb-8 max-h-[83.333vh] overflow-hidden">
+    <!-- Sidebar column -->
+    <div class="max-h-[83.333vh] ">
+        <app-chat-sidebar 
+            [chatPartners]="this.chatPartners()" 
+            [currentPartnerId]="this.currentPartner()?.id ?? ''"
+            (selectedPartner)="onSelectPartner($event)"
+        />
+    </div>
+
+    <!-- Chat content column -->
+    <div class="flex flex-1 flex-col bg-[#fdfbf7] rounded-3xl shadow-sm p-6 max-h-[83.333vh] gap-4">
+        <ng-container *ngTemplateOutlet="snowEffect"></ng-container>
+        <!-- header -->
+        @if (currentPartner(); as partner) {
+            <div class="flex items-center gap-3 mb-4 border border-black rounded-full px-4 py-1 w-fit bg-[#dcead9]">
+                <hlm-avatar>
+                    <img src="/catProfile3.jpg" alt="avatar profile" hlmAvatarImage>
+                </hlm-avatar>
+                <div>
+                    <h3 class="font-bold">{{ partner.username }}</h3>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-[#6b8c68] animate-pulse"></span>
+                        <span class="text-xs">Online</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- chat area -->
+            <div #msgContainer class="flex flex-col flex-1 overflow-y-auto space-y-4 pb-4">
+                @for (chatMessage of chatMessages(); track chatMessage.id) {
+                    <app-chat-single-message 
+                        [currentUserId]="this.currentUserId()"
+                        [chatMessage]="chatMessage"/>
+                }
+                @if (chatMessages().length === 0) {
+                    <div class="h-full flex items-center justify-center">
+                        <p class="italic">No message yet</p>
+                    </div>
+                }
+            </div>
+
+            <!-- new message input area -->
+            <div>
+                <form [formGroup]="chatForm" (ngSubmit)="onSubmitNewMessage()" class="flex items-center gap-2">
+                    <input hlmInput type="text" placeholder="Type your message..."
+                        formControlName="message">
+                    <button type="submit" [disabled]="chatForm.invalid" class="px-4 py-2 bg-[#1e3629] text-white rounded-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                        Senden
+                    </button>
+                </form>
+            </div>
+        }
+        @else {
+            <div class="flex items-center justify-center h-full">
+                <h3 class="font-bold text-lg text-center">Select a partner to start messaging. Or start a deal</h3>
+            </div>
+        }
+    </div>
+</div>
