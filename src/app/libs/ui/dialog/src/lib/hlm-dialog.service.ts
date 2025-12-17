@@ -3,7 +3,7 @@ import { Injectable, type TemplateRef, inject } from '@angular/core';
 import {
 	type BrnDialogOptions,
 	BrnDialogService,
-	DEFAULT_BRN_DIALOG_OPTIONS,
+	defaultOptions,
 	cssClassesToArray,
 } from '@spartan-ng/brain/dialog';
 import { HlmDialogContent } from './hlm-dialog-content';
@@ -22,7 +22,7 @@ export class HlmDialogService {
 
 	public open(component: ComponentType<unknown> | TemplateRef<unknown>, options?: Partial<HlmDialogOptions>) {
 		const mergedOptions = {
-			...DEFAULT_BRN_DIALOG_OPTIONS,
+			...defaultOptions,
 
 			...(options ?? {}),
 			backdropClass: cssClassesToArray(`${hlmDialogOverlayClass} ${options?.backdropClass ?? ''}`),
