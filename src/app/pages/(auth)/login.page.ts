@@ -6,7 +6,7 @@ import { LoginComponent } from '../../components/login/login.component';
 	standalone: true,
 	imports: [LoginComponent],
 	host: {
-		class: 'w-full max-w-md',
+		class: 'w-full',
 	},
 	template: `
 		<div class="flex min-h-screen items-center justify-center pb-20">

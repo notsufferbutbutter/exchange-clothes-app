@@ -7,11 +7,11 @@ import { ArticleRecord } from '../libs/models/article.record';
 	standalone: true,
 	imports: [HeadlinesCarouselComponent],
 	template: `
-		<app-headlines-carousel [headlines]="_headlines"></app-headlines-carousel>
+		<app-headlines-carousel [headlines]="headlines"></app-headlines-carousel>
 	`,
 })
 export default class HomePage {
-	protected readonly _headlines: ArticleRecord[] = [
+	protected readonly headlines: ArticleRecord[] = [
 		{
 			id: '1',
 			title: 'Neue Kleidertausch-Party in Berlin!',

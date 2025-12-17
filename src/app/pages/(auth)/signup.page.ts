@@ -5,7 +5,7 @@ import { SignupComponent } from '../../components/signup/signup.component';
 	selector: 'app-signup-page',
 	imports: [SignupComponent],
 	host: {
-		class: 'w-full max-w-md',
+		class: 'w-full',
 	},
 	template: `
 		<div class="flex min-h-screen items-center justify-center pb-20">
