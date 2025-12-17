@@ -1,0 +1,88 @@
+<section class="flex justify-center items-center">
+    <hlm-dialog>
+      <hlm-dialog-content class="max-w-2xl" *brnDialogContent="let ctx">
+        <hlm-dialog-header>
+          <h3 hlmDialogTitle>Tauschangebot erstellen</h3>
+          <p hlmDialogDescription>
+            Wähle ein oder mehrere Items aus deinem Schrank zum Tauschen
+          </p>
+        </hlm-dialog-header>
+
+        <div class="py-4">
+          <p class="mb-4 font-semibold">Du möchtest:</p>
+          <div class="flex items-center gap-3 p-3 bg-gray-50 rounded mb-6">
+            <img
+              [src]="item().images[0] "
+              alt="{{ item().title }}"
+              class="w-24 h-24 object-cover rounded"
+            />
+            <div>
+              <p class="font-bold">{{ item().title }}</p>
+              <p class="text-sm">Größe: {{ item().size }}</p>
+              <p class="text-sm">Zustand: {{ item().condition }}</p>
+            </div>
+          </div>
+
+          <form [formGroup]="tradeForm">
+            <div class="space-y-4">
+              <div>
+                <label hlmLabel class="mb-2 block" for="messageId">Nachricht</label>
+                <textarea
+                 id="messageId"
+                  hlmInput
+                  formControlName="message"
+                  placeholder="Schreibe eine Nachricht..."
+                  class="w-full min-h-[100px]"
+                ></textarea>
+              </div>
+
+              <div>
+                <h3 class="mb-3 block font-semibold text-lg">
+                  Wähle Items aus deinem Schrank:
+                </h3>
+                <div class="max-h-50 overflow-y-auto space-y-2" >
+                  @if (userItems().length === 0) {
+                    <p class="text-sm text-gray-500 text-center py-8">
+                      Du hast noch keine Items in deinem Schrank. Füge zuerst Items hinzu.
+                    </p>
+                  }
+                  @for (userItem of userItems(); track userItem.id || $index) {
+                    <button
+                      class="flex items-center gap-3 p-3 border rounded cursor-pointer hover:bg-gray-50 transition"
+                      [class.border-[#8B9A7E]]="isItemSelected(userItem.id)"
+                      [class.bg-green-50]="isItemSelected(userItem.id)"
+                      (click)="toggleItemSelection(userItem.id, $event)"
+                    >
+                      <img
+                        [src]="userItem.images[0]"
+                        alt="{{ userItem.title }}"
+                        class="w-16 h-16 object-cover rounded"
+                      />
+                      <div class="flex-1">
+                        <p class="font-medium">{{ userItem.title }}</p>
+                        <p class="text-sm text-gray-600">Größe: {{ userItem.size }}</p>
+                      </div>
+                    </button>
+                  }
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <hlm-dialog-footer class="flex justify-end gap-3">
+          <button hlmBtn variant="outline" type="button" (click)="onCancel()">
+            Abbrechen
+          </button>
+          <button
+            hlmBtn
+            class="bg-[#8B9A7E]"
+            [disabled]="tradeForm.invalid || selectedItemIds().length === 0 || isSubmitting()"
+            (click)="onSubmitTradeRequest()"
+          >
+            {{ isSubmitting() ? 'Wird gesendet...' : 'Anfrage senden' }}
+          </button>
+        </hlm-dialog-footer>
+      </hlm-dialog-content>
+    </hlm-dialog>
+</section>
