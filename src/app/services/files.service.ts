@@ -14,7 +14,10 @@ export class FilesService {
                 .from('clothes_files')
                 .upload(filePath, file);
 
-            if(error) console.error('Error at uploading file: ', file.name, '. Error: ', error);
+            if (error) {
+                console.error('Error at uploading file: ', file.name, '. Error: ', error);
+                throw new Error(`Could not upload "${file.name}": ${error.message}`);
+            }
 
             const { data } = supabase.storage
                 .from('clothes_files')

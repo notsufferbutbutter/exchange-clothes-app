@@ -2,6 +2,19 @@ import { Injectable, signal } from "@angular/core";
 import { User } from "../libs/models/user.record";
 import { supabase } from "src/backend/infrastructure/supabase/superbase-client";
 
+interface UserProfileRow {
+    user_id: string;
+    email: string;
+    username: string | null;
+    created_at: string;
+    updated_at?: string | null;
+    password_hash?: string | null;
+    avatar_url?: string | null;
+    bio?: string | null;
+    location_city?: string | null;
+    location_country?: string | null;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -13,7 +26,7 @@ export class UserService {
             .from('users')
             .select('*')
             .eq('user_id', userId)
-            .single();
+            .maybeSingle();
         
         if(error || !data) {
             console.error('Error at getting current user', error);
@@ -24,35 +37,28 @@ export class UserService {
     }
 
     async setCurrentUserById(userId: string) {
+        // The RPC uses auth.uid(), so the browser cannot create someone else's profile.
         const { data, error } = await supabase
-            .from('users')
-            .select('*')
-            .eq('user_id', userId)
-            .single();
-        
-        if(error || !data) {
-            console.error('Error at getting current user', error);
-            return;
+            .rpc('ensure_current_user_profile')
+            .single<UserProfileRow>();
+
+        if (error || !data || data.user_id !== userId) {
+            this.currentUser.set(null);
+            const profileError = error ?? { message: 'Your user profile could not be loaded.' };
+            console.error('Error at ensuring current user profile', profileError);
+            return { error: profileError };
         }
 
         const user = this.mapToUser(data);
         this.currentUser.set(user);
-    }
-
-
-    async registerCurrentUser(userId: string, email: string) {
-        const { error } = await supabase
-            .from('users')
-            .insert({ user_id: userId, email: email, created_at: new Date().toISOString() });
-
-        if(error) console.error('Error at registering current user to the database', error);
+        return { error: null };
     }
 
     resetUser() {
         this.currentUser.set(null);
     }
 
-    private mapToUser(data: any): User {
+    private mapToUser(data: UserProfileRow): User {
         return {
             id: data.user_id,
             username: data.username ?? '',

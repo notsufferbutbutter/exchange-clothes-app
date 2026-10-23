@@ -46,15 +46,17 @@ export class SignupComponent {
 
 	async onSubmit() {
 		if (this.signupForm.invalid) return;
+		this.errorMessage.set(null);
+		this.succeededMessage.set(null);
 
 		const { email, password } = this.signupForm.value;
 
-		const { error, message } = await this.authService.signupNewUser(email!, password!);
+		const { error, message } = await this.authService.signup(email!, password!);
 
 		if (error) {
 			this.errorMessage.set(error.message);
 		} else {
-			this.succeededMessage.set(message);
+			this.succeededMessage.set(message ?? null);
 		}
 	}
 

@@ -18,8 +18,8 @@ import { FilesService } from '@ecp/app/services/files.service';
 @Component({
 	selector: 'app-closet',
 	imports: [
-		ClosetItemComponent, 
-		HlmFieldGroup, HlmFieldLabel, HlmInput, HlmField, BrnSelectImports, HlmSelectImports, 
+		ClosetItemComponent,
+		HlmFieldGroup, HlmFieldLabel, HlmInput, HlmField, BrnSelectImports, HlmSelectImports,
 		ReactiveFormsModule,
 		BrnDialogImports, HlmDialogImports, HlmLabelImports, HlmInputImports, HlmButtonImports,
 	],
@@ -38,8 +38,10 @@ export class ClosetComponent {
 	}
 
 	readonly items = signal<Item[]>([]);
+	readonly errorMessage = signal<string | null>(null);
+	readonly isSaving = signal(false);
 	readonly edittingItem = signal<Item | null>(null);
-	files : File[] = []; 
+	files : File[] = [];
 	existingFileUrlsBeforeEdit :string[] = [];
 	fileUrls : string[] = [];
 
@@ -69,66 +71,81 @@ export class ClosetComponent {
 	});
 
 	async onSubmit() {
-		if (this.itemForm.invalid || !this.currentUserId) return;
-
-		// Validate files for new items only
-		if (!this.edittingItem() && this.files.length === 0) {
-			console.error('Please select at least one image');
+		if (this.isSaving()) return;
+		this.errorMessage.set(null);
+		if (this.itemForm.invalid) return;
+		if (!this.currentUserId) {
+			this.errorMessage.set('Your user profile could not be loaded. Please sign in again. If this continues, your account profile needs to be repaired.');
 			return;
 		}
 
-		const raw = this.itemForm.value;
-		const newFileUrls = await this.filesService.uploadFilesToStorage(this.files);
-
-		if(this.edittingItem()) {
-			newFileUrls.forEach((newFileUrl) => this.existingFileUrlsBeforeEdit.push(newFileUrl));
-			const updatedItem = {
-				id: this.edittingItem()!.id,
-				title: raw.title,	
-				description: raw.description,
-				price: Number(raw.price),
-				images: this.existingFileUrlsBeforeEdit,
-				createdAt: new Date().toISOString(),
-				ownerId: this.currentUserId,
-				category: raw.category,
-				size: raw.size,
-				condition: raw.condition,
-				brand: raw.brand,
-				color: raw.color
-			} as Item;
-
-			await this.itemsService.updateItem(this.currentUserId, this.edittingItem()!.id, updatedItem);
+		// Validate files for new items only
+		if (!this.edittingItem() && this.files.length === 0) {
+			this.errorMessage.set('Please select at least one image.');
+			return;
 		}
-		else {
-			let newItem = {
-				title: raw.title,
-				description: raw.description,
-				price: Number(raw.price),
-				images: newFileUrls,
-				updatedAt: new Date().toISOString(),
-				category: raw.category,
-				size: raw.size,
-				condition: raw.condition,
-				brand: raw.brand,
-				color: raw.color
-			} as Partial<Item>;
 
-			const data = await this.itemsService.addNewItem(this.currentUserId, newItem);
-			if(!data) {
-				console.error('Error at adding new item to database');
-				return;
+		this.isSaving.set(true);
+		try {
+			const raw = this.itemForm.value;
+			const newFileUrls = await this.filesService.uploadFilesToStorage(this.files);
+
+			if(this.edittingItem()) {
+				const updatedItem = {
+					id: this.edittingItem()!.id,
+					title: raw.title,
+					description: raw.description,
+					price: Number(raw.price),
+					images: [...this.existingFileUrlsBeforeEdit, ...newFileUrls],
+					createdAt: new Date().toISOString(),
+					ownerId: this.currentUserId,
+					category: raw.category,
+					size: raw.size,
+					condition: raw.condition,
+					brand: raw.brand,
+					color: raw.color
+				} as Item;
+
+				await this.itemsService.updateItem(this.currentUserId, this.edittingItem()!.id, updatedItem);
 			}
-			this.items.update(items => [...items, data]);
+			else {
+				let newItem = {
+					title: raw.title,
+					description: raw.description,
+					price: Number(raw.price),
+					images: newFileUrls,
+					updatedAt: new Date().toISOString(),
+					category: raw.category,
+					size: raw.size,
+					condition: raw.condition,
+					brand: raw.brand,
+					color: raw.color
+				} as Partial<Item>;
+
+				const data = await this.itemsService.addNewItem(this.currentUserId, newItem);
+				if(!data) {
+					console.error('Error at adding new item to database');
+					return;
+				}
+				this.items.update(items => [...items, data]);
+			}
+
+			this.onCleanUp();
+		} catch (error) {
+			console.error('Error saving item:', error);
+			this.errorMessage.set(error instanceof Error ? error.message : 'The item could not be saved. Please try again.');
+		} finally {
+			this.isSaving.set(false);
 		}
-		
-		this.onCleanUp();
 	}
 
 	onAdd() {
+		this.errorMessage.set(null);
 		this.dialog.open()
 	}
 
 	async onEdit(editingItem: Item) {
+		this.errorMessage.set(null);
 		if(!editingItem) {
 			console.error('Error at loading item: ', editingItem);
 			return;
@@ -148,13 +165,13 @@ export class ClosetComponent {
 		})
 		this.dialog.open()
 		this.edittingItem.set(editingItem);
-		
+
 	}
 
 	hasChanges() : boolean {
 		const original = this.edittingItem();
 		if(!original) return false;
-		
+
 		const currentItem = this.itemForm.value;
 
 		if (original.title !== currentItem.title) return true;

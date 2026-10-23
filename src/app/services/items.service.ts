@@ -74,9 +74,9 @@ export class ItemsService {
 
         if (error || !data) {
             console.error("Failed at adding new item:", error);
-            return;
+            throw new Error(error?.message ?? 'The item could not be saved.');
         }
-        return data[0];
+        return this.mapToItem(data[0]);
     }
 
      async updateItem(currentUserId:string, itemId: number, updatedItem: Partial<Item>) {
@@ -100,7 +100,10 @@ export class ItemsService {
             .eq('owner_id', currentUserId)
             .select();
 
-        if (error || !data) console.error("Failed at updating item: ", itemId, ". Error:", error);
+        if (error || !data?.length) {
+            console.error("Failed at updating item: ", itemId, ". Error:", error);
+            throw new Error(error?.message ?? 'The item could not be updated.');
+        }
     }
 
     async archiveItem(itemId: number): Promise<boolean> {

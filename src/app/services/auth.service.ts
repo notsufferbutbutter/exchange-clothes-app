@@ -15,15 +15,14 @@ export class AuthService {
 
 	async restoreSession() {
 		const { data, error } = await supabase.auth.getSession();
-		if(error) console.error('Error at restoring session', error);
-		if (!data.session) {
+		if (error || !data.session) {
+			if (error) console.error('Error at restoring session', error);
 			this.isLoggedIn.set(false);
+			this.userService.resetUser();
 			return;
 		}
-		else {
-			this.isLoggedIn.set(true);
-			await this.userService.setCurrentUserById(data.session.user.id);
-		}
+		const { error: profileError } = await this.userService.setCurrentUserById(data.session.user.id);
+		this.isLoggedIn.set(!profileError);
 	}
 
 
@@ -35,12 +34,19 @@ export class AuthService {
 
 		if (error || !data.user) {
 			console.error('Error at signing up: ', error);
-			return { error };
+			return { error: error ?? { message: 'Signup did not return an account. Please try again.' } };
 		}
 
-		const userId = data.user.id;
-
-		await this.userService.registerCurrentUser(userId, email);
+		// The database trigger creates the profile even when email confirmation
+		// means signup returns no session. Only access it once authenticated.
+		if (data.session) {
+			const { error: profileError } = await this.userService.setCurrentUserById(data.session.user.id);
+			this.isLoggedIn.set(!profileError);
+			if (profileError) {
+				return { error: { message: `Your account was created, but your profile is unavailable: ${profileError.message}` } };
+			}
+			return { message: 'Your account is ready.' };
+		}
 
 		return { message: 'Check your email to verify your account' };
 	}
@@ -53,13 +59,13 @@ export class AuthService {
 
 		if (error || !data.user?.id) {
 			console.error('Error at having userId from login', error);
-			return { error };
+			return { error: error ?? { message: 'Login did not return an account. Please try again.' } };
 		}
 
 		const userId = data.user.id;
-		console.log(userId);
-		this.isLoggedIn.set(true);
-		await this.userService.setCurrentUserById(userId);
+		const { error: profileError } = await this.userService.setCurrentUserById(userId);
+		this.isLoggedIn.set(!profileError);
+		if (profileError) return { error: profileError };
 
 		return { data, error };
 	}
