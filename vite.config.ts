@@ -19,7 +19,12 @@ export default defineConfig(({ mode }) => ({
 	plugins: [
 		// Resolves TS path aliases like @spartan-ng/helm/icon at runtime
 		tsconfigPaths(),
-		analog(),
+		analog({
+			ssr: false,
+			prerender: {
+				routes: [],
+			},
+			}),
 		tailwindcss(),
 	],
 	test: {
